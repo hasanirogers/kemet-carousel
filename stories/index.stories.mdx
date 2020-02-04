@@ -1,0 +1,55 @@
+import { Story, Preview, Meta, Props, html } from '@open-wc/demoing-storybook';
+
+import '../kemet-carousel.js';
+
+<Meta 
+  title="KemetCarousel"
+  parameters={{
+    component: "kemet-carousel",
+    options: { selectedPanel: "storybookjs/knobs/panel" }
+  }}
+/>
+
+# KemetCarousel
+
+A component for...
+
+## Features:
+
+- a
+- b
+- ...
+
+## How to use
+
+### Installation
+
+```bash
+yarn add kemet-carousel
+```
+
+```js
+import 'kemet-carousel/kemet-carousel.js';
+```
+
+<Preview withToolbar>
+  <Story name="Simple">
+    {html`
+      <kemet-carousel></kemet-carousel>
+    `}
+  </Story>
+</Preview>
+
+## API
+
+<Props of="kemet-carousel" />
+
+## Variations
+
+###### Custom Title
+
+<Story name="Custom Title">
+  {html`
+    <kemet-carousel .title=${'Hello World'}></kemet-carousel>
+  `}
+</Story>

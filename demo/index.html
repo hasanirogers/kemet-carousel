@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <style>
+    :host,
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: sans-serif;
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      padding: 0;
+      margin: 0;
+      background: #fafafa;
+    }
+
+    #demo {
+      width: 80%;
+      max-width: 48rem;
+      margin: auto;
+    }
+
+    kemet-carousel {
+      --kemet-carousel-height: 18rem;
+    }
+
+    kemet-carousel [slot="slides"] {
+      color: #fafafa;
+      height: 100%;
+      border-radius: 1rem;
+      background: rgba(36,49,56,1);
+    }
+
+    kemet-carousel [slot="pagination"] {
+      color: #fafafa;
+      width: 100%;
+      display: flex;
+      padding: 1rem;
+      position: absolute;
+      bottom: 0rem;
+      z-index: 9;
+      border-bottom-left-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    kemet-carousel[index="3"] [slot="pagination"] {
+      position: relative;
+      margin-top: 1rem;
+      border-radius: 1rem;
+    }
+
+    kemet-carousel [slot="pagination"] > div {
+      margin: auto;
+      display: inline-flex;
+    }
+
+    kemet-carousel-slide {
+      display: flex;
+    }
+
+    kemet-carousel-slide > div {
+      margin: auto;
+    }
+
+    kemet-carousel-slide img {
+      width: 100%;
+      border-radius: 1rem;
+    }
+
+    kemet-carousel-link {
+      text-align: center;
+      width: 24px;
+      height: 24px;
+      margin: 0 0.5rem;
+      border-radius: 50%;
+      border: 1px solid #fafafa;
+    }
+
+    kemet-carousel-link,
+    kemet-carousel-prev,
+    kemet-carousel-next {
+      transition: transform 300ms ease;
+    }
+
+    kemet-carousel-link:hover:not([selected]),
+    kemet-carousel-prev,
+    kemet-carousel-next {
+      transform: scale(1.2);
+    }
+
+    kemet-carousel-link[selected] {
+      font-weight: bold;
+      color: rgba(36,49,56,1);
+      background: #fafafa;
+    }
+  </style>
+</head>
+<body>
+  <div id="demo"></div>
+
+  <script type="module">
+    import { html, render } from 'lit-html';
+    import '../kemet-carousel.js';
+    import '../kemet-carousel-link.js';
+    import '../kemet-carousel-prev.js';
+    import '../kemet-carousel-next.js';
+    import '../kemet-carousel-slide.js';
+
+    render(
+      html`
+      <kemet-carousel>
+        <div slot="slides">
+          <kemet-carousel-slide>
+            <div>
+              <h1>
+                Slide one.
+                <kemet-carousel-next style="position:relative; top:8px;">
+                  <svg viewBox="0 0 24 24" width="32" height="32" fill="#ffffff">
+                    <path d="M9.98 6l6 6-6 6-1.4-1.4 4.6-4.6-4.6-4.6z"></path>
+                  </svg>
+                </kemet-carousel-next>
+              </h1>
+            </div>
+          </kemet-carousel-slide>
+
+          <kemet-carousel-slide>
+            <img src="https://assets.rpgsite.net/images/images/000/077/892/original/Final-Fantasy-VII-Remake_20190619_06.jpg" />
+          </kemet-carousel-slide>
+
+          <kemet-carousel-slide vertical>
+            <div>Slide three (vertical).</div>
+          </kemet-carousel-slide>
+
+          <kemet-carousel-slide>
+            <div>
+              <iframe width="420" height="315" src="https://www.youtube.com/embed/MDets1_G9gQ"></iframe>
+            </div>
+          </kemet-carousel-slide>
+        </div>
+
+        <div slot="pagination">
+          <div>
+            <kemet-carousel-prev>
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="#ffffff">
+                <path d="M15.42 7.4l-4.6 4.6 4.6 4.6-1.4 1.4-6-6 6-6z"></path>
+              </svg>
+            </kemet-carousel-prev>
+            <kemet-carousel-link slide="0">1</kemet-carousel-link>
+            <kemet-carousel-link slide="1">2</kemet-carousel-link>
+            <kemet-carousel-link slide="2">3</kemet-carousel-link>
+            <kemet-carousel-link slide="3">4</kemet-carousel-link>
+            <kemet-carousel-next>
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="#ffffff">
+                <path d="M9.98 6l6 6-6 6-1.4-1.4 4.6-4.6-4.6-4.6z"></path>
+              </svg>
+            </kemet-carousel-next>
+          </div>
+        </div>
+      </kemet-carousel>
+      `,
+      document.querySelector('#demo')
+    );
+  </script>
+</body>
+</html>
