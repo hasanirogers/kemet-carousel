@@ -37,7 +37,20 @@
       background: rgba(36,49,56,1);
     }
 
-    kemet-carousel [slot="pagination"] {
+    kemet-carousel[pagination="top"] [slot="pagination"] {
+      position: absolute;
+      top: 0;
+      z-index: 9;
+      padding: 1rem;
+      color: white;
+    }
+
+    kemet-carousel[pagination="left"] [slot="pagination"],
+    kemet-carousel[pagination="right"] [slot="pagination"] {
+      padding: 1rem;
+    }
+
+    kemet-carousel[pagination="bottom"] [slot="pagination"] {
       color: #fafafa;
       width: 100%;
       display: flex;
@@ -50,7 +63,11 @@
       background: rgba(0, 0, 0, 0.5);
     }
 
-    kemet-carousel[index="3"] [slot="pagination"] {
+    kemet-carousel:not([pagination="bottom"]) [slot="pagination"] {
+      height: 100%;
+    }
+
+    kemet-carousel[index="3"][pagination="bottom"] [slot="pagination"] {
       position: relative;
       margin-top: 1rem;
       border-radius: 1rem;
@@ -59,6 +76,17 @@
     kemet-carousel [slot="pagination"] > div {
       margin: auto;
       display: inline-flex;
+    }
+
+    kemet-carousel[pagination="left"] [slot="pagination"] > div,
+    kemet-carousel[pagination="right"] [slot="pagination"] > div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      height: 100%;
+      border-radius: 1rem;;
+      background: rgba(0, 0, 0, 0.5);
     }
 
     kemet-carousel-slide {
@@ -78,6 +106,7 @@
       text-align: center;
       width: 24px;
       height: 24px;
+
       margin: 0 0.5rem;
       border-radius: 50%;
       border: 1px solid #fafafa;
@@ -113,9 +142,24 @@
     import '../kemet-carousel-next.js';
     import '../kemet-carousel-slide.js';
 
+    const handleChange = (event) => {
+      const carousel = document.querySelector('kemet-carousel');
+      carousel.pagination = event.target.value;
+    }
+
     render(
       html`
-      <kemet-carousel>
+      <h1>Choose a Pagination Location</h1>
+      <p>
+        <select @change=${(event) => handleChange(event)}>
+          <option value="top">Top</option>
+          <option value="right">Right</option>
+          <option value="bottom" selected>Bottom</option>
+          <option value="left">Left</option>
+        </select>
+      </p>
+
+      <kemet-carousel pagination="bottom">
         <div slot="slides">
           <kemet-carousel-slide>
             <div>
@@ -164,6 +208,8 @@
           </div>
         </div>
       </kemet-carousel>
+      <br></br>
+      <hr></hr>
       `,
       document.querySelector('#demo')
     );

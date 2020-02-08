@@ -24,6 +24,16 @@ export class KemetCarousel extends LitElement {
         display: none;
       }
 
+      :host([pagination="top"]) {
+        display: flex;
+        flex-direction: column;
+      }
+
+      :host([pagination="left"]),
+      :host([pagination="right"]) {
+        display: flex;
+      }
+
       .slides {
         display: block;
         position: relative;
@@ -34,6 +44,11 @@ export class KemetCarousel extends LitElement {
         height: 100%;
         overflow: hidden;
       }
+
+      :host([pagination="top"]) .pagination,
+      :host([pagination="left"]) .pagination {
+        order: -1;
+      }
     `;
   }
 
@@ -43,10 +58,9 @@ export class KemetCarousel extends LitElement {
         type: Number,
         reflect: true
       },
-			__animating: {
-        type: Boolean,
-        defaultValue: true,
-        reflect: false
+      pagination: {
+        type: String,
+        reflect: true
       }
 		};
 	}
@@ -56,7 +70,6 @@ export class KemetCarousel extends LitElement {
 
     // managed properties
     this.index = 0;
-    this.__animating = false;
 
     // standard properties
     this.slides = [];
@@ -95,8 +108,6 @@ export class KemetCarousel extends LitElement {
 			this.index = 0;
 			this.updateIndex(this.index);
     }
-
-		this.__animating = false;
   }
 
   render() {
@@ -130,7 +141,6 @@ export class KemetCarousel extends LitElement {
   }
 
   updateIndex(newIndex) {
-		this.__animating = true;
     let currentSlide = this.slides[this.index];
     const currentLink = this.links[newIndex];
 
@@ -163,8 +173,7 @@ export class KemetCarousel extends LitElement {
 
   handleTransitionEnd(event) {
 		event.target.classList.remove("out");
-		event.target.removeEventListener("transitionend", this.handleTransitionEnd);
-		this.__animating = false;
+    event.target.removeEventListener("transitionend", this.handleTransitionEnd);
   }
 
   handleLink(event) {
