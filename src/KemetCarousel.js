@@ -191,6 +191,13 @@ export class KemetCarousel extends LitElement {
     // update new slide
     currentSlide = this.slides[this.index];
     currentSlide.content.setAttribute("aria-hidden", "false");
+
+    // notify consumers of slide change
+    this.dispatchEvent(new CustomEvent('kemet-carousel-changed', {
+      bubbles: true,
+      composed: true,
+      detail: this,
+    }))
   }
 
   handleTransitionEnd(event) {

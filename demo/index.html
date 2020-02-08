@@ -165,10 +165,15 @@
       carousel.slideshow = 0;
     }
 
+    document.addEventListener('kemet-carousel-changed', (event) => {
+      document.querySelector('h1 span').innerHTML = event.detail.index + 1;
+    });
+
     render(
       html`
-      <h1>Choose a Pagination Location</h1>
+      <h1>Current Slide: <span></span></h1>
       <p>
+        Pagination:
         <select @change=${(event) => handleChange(event)}>
           <option value="top">Top</option>
           <option value="right">Right</option>
