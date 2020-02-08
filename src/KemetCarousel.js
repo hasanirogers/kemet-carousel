@@ -61,6 +61,9 @@ export class KemetCarousel extends LitElement {
       pagination: {
         type: String,
         reflect: true
+      },
+      slideshow: {
+        type: Number,
       }
 		};
 	}
@@ -70,6 +73,8 @@ export class KemetCarousel extends LitElement {
 
     // managed properties
     this.index = 0;
+    this.pagination = "bottom";
+    this.slideshow = 0;
 
     // standard properties
     this.slides = [];
@@ -110,6 +115,10 @@ export class KemetCarousel extends LitElement {
     }
   }
 
+  firstUpdated() {
+    this.handleSlideShow();
+  }
+
   render() {
     return html`
 		  <div class="slides">
@@ -120,6 +129,14 @@ export class KemetCarousel extends LitElement {
         <slot name="pagination"></slot>
       </div>
     `;
+  }
+
+  handleSlideShow() {
+    if (this.slideshow > 0) {
+      setInterval(() => {
+        this.updateIndex(this.index + 1);
+      }, this.slideshow * 1000);
+    }
   }
 
   handleNext() {
@@ -142,12 +159,17 @@ export class KemetCarousel extends LitElement {
 
   updateIndex(newIndex) {
     let currentSlide = this.slides[this.index];
-    const currentLink = this.links[newIndex];
+    let currentLink = this.links[newIndex];
 
     // remove selected from all links
     this.links.forEach(link => {
       link.selected = false;
     });
+
+    // if current link is invalid assume it's the first link
+    if(!currentLink) {
+      [currentLink] = this.links;
+    }
 
     // add selected to current link
     currentLink.selected = true;

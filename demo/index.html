@@ -129,6 +129,13 @@
       color: rgba(36,49,56,1);
       background: #fafafa;
     }
+
+    kemet-carousel-link a {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      margin-top: 2px;
+    }
   </style>
 </head>
 <body>
@@ -159,7 +166,7 @@
         </select>
       </p>
 
-      <kemet-carousel pagination="bottom">
+      <kemet-carousel pagination="bottom" slideshow="3">
         <div slot="slides">
           <kemet-carousel-slide>
             <div>
@@ -196,10 +203,18 @@
                 <path d="M15.42 7.4l-4.6 4.6 4.6 4.6-1.4 1.4-6-6 6-6z"></path>
               </svg>
             </kemet-carousel-prev>
-            <kemet-carousel-link slide="0">1</kemet-carousel-link>
-            <kemet-carousel-link slide="1">2</kemet-carousel-link>
-            <kemet-carousel-link slide="2">3</kemet-carousel-link>
-            <kemet-carousel-link slide="3">4</kemet-carousel-link>
+            <kemet-carousel-link slide="0">
+              <a>1</a>
+            </kemet-carousel-link>
+            <kemet-carousel-link slide="1">
+              <a>2</a>
+            </kemet-carousel-link>
+            <kemet-carousel-link slide="2">
+              <a>3</a>
+            </kemet-carousel-link>
+            <kemet-carousel-link slide="3">
+              <a>4</a>
+            </kemet-carousel-link>
             <kemet-carousel-next>
               <svg viewBox="0 0 24 24" width="24" height="24" fill="#ffffff">
                 <path d="M9.98 6l6 6-6 6-1.4-1.4 4.6-4.6-4.6-4.6z"></path>
