@@ -79,7 +79,7 @@ export class KemetCarousel extends LitElement {
     // standard properties
     this.slides = [];
     this.links = [];
-		this.loaded = false;
+    this.loaded = false;
 
     // bindings
     this.addEventListener('kemet-carousel-next', this.handleNext.bind(this));
@@ -115,7 +115,7 @@ export class KemetCarousel extends LitElement {
     }
   }
 
-  firstUpdated() {
+  updated() {
     this.handleSlideShow();
   }
 
@@ -132,11 +132,11 @@ export class KemetCarousel extends LitElement {
   }
 
   handleSlideShow() {
-    if (this.slideshow > 0) {
-      setInterval(() => {
+    setTimeout(() => {
+      if (this.slideshow > 0) {
         this.updateIndex(this.index + 1);
-      }, this.slideshow * 1000);
-    }
+      }
+    }, this.slideshow * 1000);
   }
 
   handleNext() {

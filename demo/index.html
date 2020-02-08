@@ -154,6 +154,17 @@
       carousel.pagination = event.target.value;
     }
 
+    const startSlideShow = () => {
+      const carousel = document.querySelector('kemet-carousel');
+      carousel.slideshow = 6;
+      carousel.handleNext();
+    }
+
+    const stopSlideShow = () => {
+      const carousel = document.querySelector('kemet-carousel');
+      carousel.slideshow = 0;
+    }
+
     render(
       html`
       <h1>Choose a Pagination Location</h1>
@@ -166,7 +177,7 @@
         </select>
       </p>
 
-      <kemet-carousel pagination="bottom" slideshow="3">
+      <kemet-carousel pagination="bottom">
         <div slot="slides">
           <kemet-carousel-slide>
             <div>
@@ -225,6 +236,12 @@
       </kemet-carousel>
       <br></br>
       <hr></hr>
+      <br></br>
+      <p>
+        <button @click=${startSlideShow}>Start Slideshow</button>
+        &nbsp;&nbsp;
+        <button @click=${stopSlideShow}>Stop Slideshow</button>
+      </p>
       `,
       document.querySelector('#demo')
     );
