@@ -172,7 +172,9 @@ export class KemetCarousel extends LitElement {
     }
 
     // add selected to current link
-    currentLink.selected = true;
+    if(currentLink) {
+      currentLink.selected = true;
+    }
 
     // currentSlide can be undefined
 		if (currentSlide) {
