@@ -7,8 +7,21 @@ export class KemetCarouselPrev extends LitElement {
         :host {
           cursor: pointer;
         }
+
+        :host([disabled]) {
+          cursor: not-allowed;
+        }
       `
     ]
+  }
+
+  static get properties() {
+    return {
+      disabled: {
+        type: Boolean,
+        reflect: true,
+      }
+    }
   }
 
   render() {
@@ -18,10 +31,12 @@ export class KemetCarouselPrev extends LitElement {
   }
 
   prev() {
-    this.dispatchEvent(new CustomEvent('kemet-carousel-prev', {
-      bubbles: true,
-      composed: true,
-      detail: this,
-    }))
+    if (!this.disabled) {
+      this.dispatchEvent(new CustomEvent('kemet-carousel-prev', {
+        bubbles: true,
+        composed: true,
+        detail: this,
+      }));
+    }
   }
 }

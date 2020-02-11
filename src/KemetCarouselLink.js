@@ -10,6 +10,10 @@ export class KemetCarouselLink extends LitElement {
       selected: {
         type: Boolean,
         reflect: true,
+      },
+      disabled: {
+        type: Boolean,
+        reflect: true,
       }
     }
   }
@@ -19,6 +23,10 @@ export class KemetCarouselLink extends LitElement {
       css `
         :host(:not([selected])) {
           cursor: pointer;
+        }
+
+        :host([disabled]) {
+          cursor: not-allowed;
         }
       `
     ]
@@ -31,10 +39,12 @@ export class KemetCarouselLink extends LitElement {
   }
 
   changed() {
-    this.dispatchEvent(new CustomEvent('kemet-carousel-link', {
-      bubbles: true,
-      composed: true,
-      detail: this,
-    }))
+    if(!this.disabled) {
+      this.dispatchEvent(new CustomEvent('kemet-carousel-link', {
+        bubbles: true,
+        composed: true,
+        detail: this,
+      }));
+    }
   }
 }

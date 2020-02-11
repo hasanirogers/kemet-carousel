@@ -118,11 +118,19 @@
       transition: transform 300ms ease;
     }
 
+    kemet-carousel-link[disabled],
+    kemet-carousel-prev[disabled],
+    kemet-carousel-next[disabled] {
+      opacity: 0.25;
+    }
+
     kemet-carousel-link:hover:not([selected]),
     kemet-carousel-prev,
     kemet-carousel-next {
       transform: scale(1.2);
     }
+
+
 
     kemet-carousel-link[selected] {
       font-weight: bold;
@@ -165,6 +173,11 @@
       carousel.slideshow = 0;
     }
 
+    const enableNextBtn = () => {
+      const nextBtn = document.querySelector('kemet-carousel-next[disabled]');
+      nextBtn.disabled = false;
+    }
+
     document.addEventListener('kemet-carousel-change-finished', (event) => {
       document.querySelector('h1 span').innerHTML = event.detail.index + 1;
     });
@@ -188,12 +201,13 @@
             <div>
               <h1>
                 Slide one.
-                <kemet-carousel-next style="position:relative; top:8px;">
+                <kemet-carousel-next disabled style="position:relative; top:8px;">
                   <svg viewBox="0 0 24 24" width="32" height="32" fill="#ffffff">
                     <path d="M9.98 6l6 6-6 6-1.4-1.4 4.6-4.6-4.6-4.6z"></path>
                   </svg>
                 </kemet-carousel-next>
               </h1>
+              <button @click=${enableNextBtn}>Click to Enable Next Arrow</button>
             </div>
           </kemet-carousel-slide>
 

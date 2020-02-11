@@ -20,7 +20,7 @@ export class KemetCarouselSlide extends LitElement {
 					left: 0;
 					width: 100%;
 					height: 100%;
-          transition: transform ease var(--kemet-carousel-slide-speed, 1s), opacity ease var(--kemet-carousel-slide-fade-speed, 1s);
+          transition: transform ease var(--kemet-carousel-slide-speed, 0.3s), opacity ease var(--kemet-carousel-slide-fade-speed, 1s);
 				}
 
         :host([aria-hidden="false"]) {
