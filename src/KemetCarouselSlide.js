@@ -20,29 +20,32 @@ export class KemetCarouselSlide extends LitElement {
 					left: 0;
 					width: 100%;
 					height: 100%;
+          transition: transform ease var(--kemet-carousel-slide-speed, 1s), opacity ease var(--kemet-carousel-slide-fade-speed, 1s);
 				}
 
         :host([aria-hidden="false"]) {
-					transition: transform 0.3s 0.1s;
+          z-index: 1;
 					transform: translate(0, 0);
 				}
 
-        :host([aria-hidden="true"]) {
-					transform: translate(-100%, 0);
-				}
-
-        :host([aria-hidden="true"].out) {
+        /* horizontal */
+        :host([aria-hidden="true"][transition="horizontal"]) {
 					transform: translate(100%, 0);
-					transition: transform 0.3s 0.101s, opacity 0.001s.3s;
 				}
 
-        :host([aria-hidden="true"][vertical]) {
+        /* vertical */
+        :host([aria-hidden="true"][transition="vertical"]) {
 					transform: translate(0, -100%);
 				}
 
-        :host([aria-hidden="true"][vertical].out) {
-					transform: translate(0, 100%);
-				}
+        /* fade */
+        :host([transition="fade"]) {
+          opacity: 0;
+        }
+
+        :host([aria-hidden="false"][transition="fade"]) {
+          opacity: 1;
+        }
 			`
 		];
 	}
@@ -51,6 +54,10 @@ export class KemetCarouselSlide extends LitElement {
 		return {
 			seen: {
         type: Number
+      },
+      transition: {
+        type: String,
+        reflect: true,
       },
 			"aria-hidden": {
         type: String,
@@ -61,7 +68,8 @@ export class KemetCarouselSlide extends LitElement {
 
 	constructor() {
 		super();
-		this.seen = false;
+    this.seen = false;
+    this.transition = "horizontal";
 		this["aria-hidden"] = "true";
 	}
 

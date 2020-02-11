@@ -165,13 +165,13 @@
       carousel.slideshow = 0;
     }
 
-    document.addEventListener('kemet-carousel-changed', (event) => {
+    document.addEventListener('kemet-carousel-change-finished', (event) => {
       document.querySelector('h1 span').innerHTML = event.detail.index + 1;
     });
 
     render(
       html`
-      <h1>Current Slide: <span></span></h1>
+      <h1>Current Slide: <span>1</span></h1>
       <p>
         Pagination:
         <select @change=${(event) => handleChange(event)}>
@@ -201,7 +201,7 @@
             <img src="https://assets.rpgsite.net/images/images/000/077/892/original/Final-Fantasy-VII-Remake_20190619_06.jpg" />
           </kemet-carousel-slide>
 
-          <kemet-carousel-slide vertical>
+          <kemet-carousel-slide transition="vertical">
             <div>Slide three (vertical).</div>
           </kemet-carousel-slide>
 
@@ -209,6 +209,10 @@
             <div>
               <iframe width="420" height="315" src="https://www.youtube.com/embed/MDets1_G9gQ"></iframe>
             </div>
+          </kemet-carousel-slide>
+
+          <kemet-carousel-slide transition="fade">
+            <div>Slide five (fade).</div>
           </kemet-carousel-slide>
         </div>
 
@@ -230,6 +234,9 @@
             </kemet-carousel-link>
             <kemet-carousel-link slide="3">
               <a>4</a>
+            </kemet-carousel-link>
+            <kemet-carousel-link slide="4">
+              <a>5</a>
             </kemet-carousel-link>
             <kemet-carousel-next>
               <svg viewBox="0 0 24 24" width="24" height="24" fill="#ffffff">

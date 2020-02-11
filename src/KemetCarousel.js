@@ -177,7 +177,6 @@ export class KemetCarousel extends LitElement {
     // currentSlide can be undefined
 		if (currentSlide) {
       currentSlide.content.addEventListener("transitionend", this.handleTransitionEnd);
-			currentSlide.content.classList.add("out");
       currentSlide.content.setAttribute("aria-hidden", "true");
     }
 
@@ -193,7 +192,7 @@ export class KemetCarousel extends LitElement {
     currentSlide.content.setAttribute("aria-hidden", "false");
 
     // notify consumers of slide change
-    this.dispatchEvent(new CustomEvent('kemet-carousel-changed', {
+    this.dispatchEvent(new CustomEvent('kemet-carousel-change-start', {
       bubbles: true,
       composed: true,
       detail: this,
@@ -201,7 +200,12 @@ export class KemetCarousel extends LitElement {
   }
 
   handleTransitionEnd(event) {
-		event.target.classList.remove("out");
+    this.dispatchEvent(new CustomEvent('kemet-carousel-change-finished', {
+      bubbles: true,
+      composed: true,
+      detail: this.closest('kemet-carousel')
+    }));
+
     event.target.removeEventListener("transitionend", this.handleTransitionEnd);
   }
 
