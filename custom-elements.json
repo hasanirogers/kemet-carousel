@@ -3,30 +3,170 @@
   "tags": [
     {
       "name": "kemet-carousel",
-      "description": "A component with a title and an action counter",
+      "description": "The overall container for the carousel.",
       "properties": [
         {
-          "name": "title",
-          "type": "String",
-          "description": "The title of your component",
-          "default": "Hey there"
+          "name": "index",
+          "type": "Number",
+          "description": "Gives and identity to each slide by indexing them.",
+          "default": 0
         },
         {
-          "name": "counter",
+          "name": "pagination",
+          "type": "String",
+          "description": "The position your pagination slot appears in. Possible values are: top, right, bottom, left.",
+          "default": "bottom"
+        },
+        {
+          "name": "slideshow",
           "type": "Number",
-          "description": "An action counter",
+          "description": "The number of seconds to wait for auto slide switching, 0 means don't auto play.",
           "default": 0
+        }
+
+      ],
+      "events": [
+        {
+          "name": "kemet-carousel-change-start",
+          "description": "Fires when a slide changes."
+        },
+        {
+          "name": "kemet-carousel-change-finished",
+          "description": "Fires after the transition effect of a slide change finishes."
+        }
+      ],
+      "slots": [
+        {
+          "name": "slides",
+          "description": "Place your slides here."
+        },
+        {
+          "name": "pagination",
+          "description": "If you want a paginator create it here."
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--kemet-carousel-width",
+          "description": "Width of the carousel. Default is: 100%."
+        },
+        {
+          "name": "--kemet-carousel-height",
+          "description": "Height of the carousel. Default is: 50vh."
+        }
+      ]
+    },
+    {
+      "name": "kemet-carousel-slide",
+      "description": "The slide for the carousel.",
+      "properties": [
+        {
+          "name": "transition",
+          "type": "String",
+          "description": "An effect for how the slide comes in and out.",
+          "default": "horizontal"
         }
       ],
       "events": [],
-      "slots": [],
+      "slots": [
+        {
+          "description": "The contents of a slide."
+        }
+      ],
       "cssProperties": [
         {
-          "name": "--kemet-carousel-text-color",
-          "description": "Main Text Color",
-          "type": "Color"
+          "name": "--kemet-carousel-slide-speed",
+          "description": "The speed of horiztonal and vertical transitions. Default is: 0.3s."
+        },
+        {
+          "name": "--kemet-carousel-slide-fade-speed",
+          "description": "The speed of the fade transition. Default is: 1s."
         }
       ]
+    },
+    {
+      "name": "kemet-carousel-link",
+      "description": "A link to a slide in the carousel",
+      "properties": [
+        {
+          "name": "slide",
+          "type": "Number",
+          "description": "Which slide to link to. Goes by 0 based index.",
+          "default": 0
+        },
+        {
+          "name": "selected",
+          "type": "Boolean",
+          "description": "Whether or not the link is current slide.",
+          "default": false
+        },
+        {
+          "name": "disabled",
+          "type": "Boolean",
+          "description": "Allow the users to disable linking until conditions are met.",
+          "default": false
+        }
+      ],
+      "events": [
+        {
+          "name": "kemet-carousel-link",
+          "description": "Fires when a link is clicked."
+        }
+      ],
+      "slots": [
+        {
+          "description": "Contents of the link."
+        }
+      ],
+      "cssProperties": []
+    },
+    {
+      "name": "kemet-carousel-prev",
+      "description": "A link to the previous slide in the carousel",
+      "properties": [
+        {
+          "name": "disabled",
+          "type": "Boolean",
+          "description": "Allow the users to disable linking until conditions are met.",
+          "default": false
+        }
+      ],
+      "events": [
+        {
+          "name": "kemet-carousel-prev",
+          "description": "Fires when the link is clicked."
+        }
+      ],
+      "slots": [
+        {
+          "description": "Contents of the link."
+        }
+      ],
+      "cssProperties": []
+    },
+    {
+      "name": "kemet-carousel-next",
+      "description": "A link to the next slide in the carousel",
+      "properties": [
+        {
+          "name": "disabled",
+          "type": "Boolean",
+          "description": "Allow the users to disable linking until conditions are met.",
+          "default": false
+        }
+      ],
+      "events": [
+        {
+          "name": "kemet-carousel-next",
+          "description": "Fires when the link is clicked."
+        }
+      ],
+      "slots": [
+        {
+          "description": "Contents of the link."
+        }
+      ],
+      "cssProperties": []
     }
   ]
 }

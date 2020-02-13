@@ -1,7 +1,7 @@
 {
   "name": "@kemet/kemet-carousel",
   "version": "1.0.0",
-  "description": "Webcomponent kemet-carousel following open-wc recommendations",
+  "description": "A designless carousel.",
   "author": "kemet-carousel",
   "license": "MIT",
   "main": "index.js",
