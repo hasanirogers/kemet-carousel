@@ -53,7 +53,7 @@ export class KemetCarouselSlide extends LitElement {
 	static get properties() {
 		return {
 			seen: {
-        type: Number
+        type: Boolean
       },
       transition: {
         type: String,

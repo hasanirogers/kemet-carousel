@@ -176,11 +176,8 @@ export class KemetCarousel extends LitElement {
       currentLink.selected = true;
     }
 
-    // currentSlide can be undefined
-		if (currentSlide) {
-      currentSlide.content.addEventListener("transitionend", this.handleTransitionEnd);
-      currentSlide.content.setAttribute("aria-hidden", "true");
-    }
+    currentSlide.content.addEventListener("transitionend", this.handleTransitionEnd);
+    currentSlide.content.setAttribute("aria-hidden", "true");
 
     // correct for wrong index entered by users
     if(newIndex > -1 && newIndex < this.slides.length) {
