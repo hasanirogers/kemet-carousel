@@ -110,7 +110,6 @@ export class KemetCarousel extends LitElement {
 		// run only once as an init
 		if (!this.loaded) {
 			this.loaded = true;
-			this.index = 0;
 			this.updateIndex(this.index);
     }
   }

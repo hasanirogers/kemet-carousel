@@ -184,7 +184,7 @@
 
     render(
       html`
-      <h1>Current Slide: <span>1</span></h1>
+      <h1>Current Slide: <span>2</span></h1>
       <p>
         Pagination:
         <select @change=${(event) => handleChange(event)}>
@@ -195,7 +195,7 @@
         </select>
       </p>
 
-      <kemet-carousel pagination="bottom">
+      <kemet-carousel pagination="bottom" index="1">
         <div slot="slides">
           <kemet-carousel-slide>
             <div>
