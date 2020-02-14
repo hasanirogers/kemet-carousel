@@ -22,8 +22,13 @@
           "type": "Number",
           "description": "The number of seconds to wait for auto slide switching, 0 means don't auto play.",
           "default": 0
+        },
+        {
+          "name": "usehash",
+          "type": "Boolean",
+          "description": "Turns on linking to slides by url. It's only met to be used with one carousel on the page.",
+          "default": false
         }
-
       ],
       "events": [
         {

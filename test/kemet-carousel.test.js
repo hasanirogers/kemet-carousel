@@ -95,6 +95,22 @@ describe('KemetCarousel', () => {
     }, 3001)
   });
 
+  it('will go to the right slide given a hash in the url', async () => {
+    window.location.hash = "#2";
+
+    const element = await fixture(html`
+      <kemet-carousel usehash>
+        <div slot="slides">
+          <kemet-carousel-slide>Slide One</kemet-carousel-slide>
+          <kemet-carousel-slide>Slide Two</kemet-carousel-slide>
+          <kemet-carousel-slide>Slide Three</kemet-carousel-slide>
+        </div>
+      </kemet-carousel>
+    `);
+
+    expect(element.index).to.equal('2');
+  });
+
   it('adjust index given an invalid one', async () => {
     const element = await fixture(html`
       <kemet-carousel>

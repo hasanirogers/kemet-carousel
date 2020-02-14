@@ -64,6 +64,9 @@ export class KemetCarousel extends LitElement {
       },
       slideshow: {
         type: Number,
+      },
+      usehash: {
+        type: Boolean,
       }
 		};
 	}
@@ -75,6 +78,7 @@ export class KemetCarousel extends LitElement {
     this.index = 0;
     this.pagination = "bottom";
     this.slideshow = 0;
+    this.usehash = false;
 
     // standard properties
     this.slides = [];
@@ -107,9 +111,23 @@ export class KemetCarousel extends LitElement {
       elementIndex += 1;
     });
 
-		// run only once as an init
+		// fake firstUpdated because slotChange happens after it
 		if (!this.loaded) {
-			this.loaded = true;
+      const hash = window.location.hash.replace('#', '');
+      const index = parseInt(hash, 10);
+
+      if(
+        this.usehash && // if the user is using hashes
+        Number.isInteger(index) && // and index from hash is a number
+        index > -1 && // and it's more than -1
+        index <= this.slides.length // but not more than the total number of slides
+      ) {
+        this.index = hash;
+      } else {
+        this.index = 0;
+      }
+
+      this.loaded = true;
 			this.updateIndex(this.index);
     }
   }
@@ -188,6 +206,10 @@ export class KemetCarousel extends LitElement {
     // update new slide
     currentSlide = this.slides[this.index];
     currentSlide.content.setAttribute("aria-hidden", "false");
+
+    if (this.usehash) {
+      window.location.hash = `#${this.index}`
+    }
 
     // notify consumers of slide change
     this.dispatchEvent(new CustomEvent('kemet-carousel-change-start', {
